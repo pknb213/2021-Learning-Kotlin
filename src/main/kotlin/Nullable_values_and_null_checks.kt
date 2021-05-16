@@ -10,9 +10,9 @@ fun main() {
         val x = parseInt(arg1)
         val y = parseInt(arg2)
 
-        //
+        // 'x * y'를 사용하면 null을 포함 할 수 있으므로 오류가 발생
         if (x != null && y != null){
-            //
+            // x와 y는 null 검사 후 자동으로 nullable이 아닌 것으로 캐스팅됩니다.
             println( x * y )
         } else {
             println("$arg1 or $arg2 is not a number")
