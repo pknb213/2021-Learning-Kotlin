@@ -1,3 +1,12 @@
+# idea
+.idea/
+
+#Gradle
+.gradle/
+.jvm/
+build/
+.DS_Store
+
 # Compiled class file
 *.class
 
