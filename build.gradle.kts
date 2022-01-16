@@ -1,32 +1,29 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.4.32"
+    kotlin("jvm") version "1.5.10"
+    application
 }
 
-group = "me.user"
+group = "me.cyj"
 version = "1.0-SNAPSHOT"
 
-dependencies {
-    testImplementation(kotlin("test-junit"))
-    implementation(kotlin("stdlib-jdk8"))
-}
-
-tasks.test {
-    useJUnit()
-}
-
-tasks.withType<KotlinCompile>() {
-    kotlinOptions.jvmTarget = "1.8"
-}
 repositories {
     mavenCentral()
 }
-val compileKotlin: KotlinCompile by tasks
-compileKotlin.kotlinOptions {
-    jvmTarget = "1.8"
+
+dependencies {
+    testImplementation(kotlin("test"))
 }
-val compileTestKotlin: KotlinCompile by tasks
-compileTestKotlin.kotlinOptions {
-    jvmTarget = "1.8"
+
+tasks.test {
+    useJUnitPlatform()
+}
+
+tasks.withType<KotlinCompile> {
+    kotlinOptions.jvmTarget = "1.8"
+}
+
+application {
+    mainClass.set("MainKt")
 }
