@@ -66,7 +66,7 @@ class Hash_Lv2_spy_clothes {
                 acc * (v.size + 1)
                 /* acc (Accumulates)의 약자로 누적 값과 value를 로컬 파라미터로 받는다.
                    순차적으로 적용하는 계산식은 누적값 * (value 크기 + 1) 이다.
-                   1st   acc = 1 (fold 초기 값), v = [headgear 1, headgear 2, headgear 3]
+                   1st  acc = 1 (fold 초기 값), v = [headgear 1, headgear 2, headgear 3]
                         1 * (3 + 1) = 4
                    2nd  acc = 3, v = [eyewear 1, eyewear 2]
                         4 * (2 + 1 ) = 12
