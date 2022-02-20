@@ -27,16 +27,41 @@ progresses	speeds	return
 
 따라서 5일째에 1개의 기능, 10일째에 3개의 기능, 20일째에 2개의 기능이 배포됩니다.
  */
-class StackQuque_Lv2_function {
-    private val progresses = listOf(95, 90, 99, 99, 80, 99)
-    private val speeds = listOf(1, 1, 1, 1, 1, 1)
 
+import java.util.*
+class StackQuque_Lv2_function {
+    private val progresses = listOf(93, 30, 50)
+    private val speeds = listOf(1, 30, 5)
+    private lateinit var queue: Queue<Int>
+    private lateinit var stack : Stack<Int>
     fun solution(): IntArray {
-        var answer = intArrayOf()
         println(progresses)
         println(speeds)
 
-        
-        return answer
+        queue = LinkedList()
+        stack = Stack()
+
+        progresses.mapIndexed { index, i ->
+            var task = i
+            var day = 0
+            while(task<100){
+                day++
+                task += speeds[index]
+//                println("~> $task, ${speeds[index]}, $day")
+            }
+            day
+        }.reduce { acc, i ->
+//            println("==> $acc, $i")
+            if(stack.empty()) stack.add(1)
+            if(acc >= i) {
+                stack.add(stack.pop()+1)
+                acc
+            } else {
+                stack.add(1)
+                i
+            }
+        }
+        println("res : $stack")
+        return stack.toIntArray()
     }
 }
