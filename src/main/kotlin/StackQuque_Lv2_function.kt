@@ -30,13 +30,13 @@ progresses	speeds	return
 
 import java.util.*
 class StackQuque_Lv2_function {
-    private val progresses = listOf(93, 30, 50)
-    private val speeds = listOf(1, 30, 5)
+    private val progresses = listOf(95, 90, 99, 99, 80, 99)
+    private val speeds = listOf(1, 1, 1, 1, 1, 1)
     private lateinit var queue: Queue<Int>
     private lateinit var stack : Stack<Int>
     fun solution(): IntArray {
-        println(progresses)
-        println(speeds)
+//        println(progresses)
+//        println(speeds)
 
         queue = LinkedList()
         stack = Stack()
@@ -61,7 +61,7 @@ class StackQuque_Lv2_function {
                 i
             }
         }
-        println("res : $stack")
+//        println("res : $stack")
         return stack.toIntArray()
     }
 }
