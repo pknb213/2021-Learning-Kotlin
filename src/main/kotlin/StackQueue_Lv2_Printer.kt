@@ -26,20 +26,63 @@
  */
 import java.util.Queue
 import java.util.LinkedList
-import kotlin.math.max
+import java.util.Stack
 
 class StackQueue_Lv2_Printer {
-    private val priorities: IntArray = listOf(2,1,3,2).toIntArray()
-    private val location: Int = 2
+    private val priorities: IntArray = listOf(1,1,9,1,1,1).toIntArray()
+    private val location: Int = 0
     lateinit var queue: Queue<Int>
+    lateinit var stack: Stack<Int>
+    lateinit var q2: Queue<Char>
+    lateinit var s2: Stack<Char>
     fun solution(): Int{
+        println(listOf(1,1,1).maxOrNull())
         queue = LinkedList()
         queue.addAll(priorities.toList())
-        queue.forEachIndexed { index, i ->
-
+        stack = Stack()
+        q2 = LinkedList()
+        s2 = Stack()
+        q2.addAll(CharRange('A',priorities.size.plus(64).toChar()).toList())
+        val searchValue = q2.elementAt(location)
+        while (queue.isNotEmpty()){
+            println("Poll > ${queue.peek()}")
+            val item = queue.poll()
+            println("Max > ${queue.maxOrNull()}")
+            queue.maxOrNull()?.let {
+                if (item < it) {
+                    queue.add(item)
+                    q2.add(q2.poll())
+                }else{
+                    stack.push(item)
+                    s2.push(q2.poll())
+                }
+            }?: run {
+                stack.push(item)
+                s2.push(q2.poll())
+            }
+            println("Queue > $queue\nStack > $stack")
         }
-
-        var answer = 0
-        return answer
+        println("q2 > $q2\ns2 > $s2")
+        return s2.indexOf(searchValue)+1
     }
 }
+
+/** 참고할 풀이 (deque 사용)
+var printerQueue = ArrayDeque<Pair<Int,Int>>()
+priorities.forEachIndexed{index, i ->
+printerQueue.offer(Pair(index,i))
+}
+
+var count = 0
+while (!printerQueue.isEmpty()){
+var first = printerQueue.poll()
+
+if(printerQueue.filter { first.second < it.second }.size > 0){
+printerQueue.offer(first)
+}else{
+count++
+if(first.first == location) return count
+}
+}
+return 0
+ */
