@@ -25,8 +25,14 @@ array	commands	return
 class Sort_Lv1_numberOfK {
     private val arr = listOf(1, 5, 2, 6, 3, 7, 4).toIntArray()
     private val command = listOf(listOf(2, 5, 3).toIntArray(), listOf(4, 4, 1).toIntArray(), listOf(1, 7, 3).toIntArray()).toTypedArray()
-    fun solution(): Int{
-
-        return 0
+    fun solution(): IntArray{
+//        println(command.get(0).toList())
+//        arr.toList().subList(command.get(0).get(0), command.get(0).get(1))
+//        arr.toList().subList()
+        var res = mutableListOf<Int>()
+        command.forEachIndexed { index, ints ->
+            if (ints[0] == ints[1]) res.add(arr[ints[0]-1]) else res.add(arr.toList().subList(ints[0]-1, ints[1]).sorted()[ints[2]-1])
+        }
+        return res.toIntArray()
     }
 }
