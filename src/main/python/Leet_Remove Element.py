@@ -43,14 +43,29 @@ Constraints:
     0 <= nums.length <= 100
     0 <= nums[i] <= 50
     0 <= val <= 100
+
+    @ 주의할점
+    아래 처럼 index point를 사용하지 않고 순차적으로 반복문을 통해 제거해가나면 실행시간이 매우 떨어진다.
+    index point를 이용하여 iteration을 활용하여 배열 내부를 변경하자. (python 반복문 특징)
+
 """
 from typing import List
 
 
 class Solution:
     def removeElement(self, nums: List[int], val: int) -> int:
-        
-        return 1
+        # print(nums, val)
+        # for i in range(nums.count(val)):
+        #     nums.remove(val)
+        # print(len(nums) - nums.count(val), nums)
+        # return len(nums) - nums.count(val)
+
+        p = 0
+        for num in nums:
+            if num != val:
+                nums[p] = num
+                p += 1
+        return p
 
 
 nums = [3,2,2,3]
