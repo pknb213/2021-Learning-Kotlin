@@ -30,22 +30,23 @@ from typing import List
 
 class Solution:
     def validMountainArray(self, arr: List[int]) -> bool:
-        if len(arr) < 3:
-            print("False")
+        n = len(arr)
+        p = 0
+
+        # index가 증가함에 따라 값도 커야 한다. (오르막)
+        while p+1 < n and arr[p] < arr[p+1]:
+            p += 1
+
+        # 정상은 시작 index, 마지막 index이면 안된다.
+        if p == 0 or p == n - 1:
             return False
-        print(arr)
-        top = max(arr)
-        top_idx = arr.index(top)
-        print("Top:", top, "idx:", top_idx)
 
-        incre = arr[:top_idx+1]
-        decre = arr[top_idx:]
-        print(incre, decre)
+        # index가 증가함에 따라 값도 작아져야 한다. (내리막)
+        while p+1 < n and arr[p] > arr[p+1]:
+            p += 1
 
-        
-
-        return False
-
+        print(p, n-1)
+        return p == n-1
 
 nums = [3,5,5,4,3,2,1]
 s = Solution()
