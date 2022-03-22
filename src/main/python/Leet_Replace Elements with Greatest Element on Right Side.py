@@ -24,20 +24,36 @@ Constraints:
     1 <= arr[i] <= 105
 
     @ 주의 사항
+    아래 솔류션으로 하면 상당히 실행 시간면에서 좋지 않은 효율을 보여 준다.
+    빠른 실행시간 지닌 코드의 예제도 같이 아래에 있다.
 """
 from typing import List
 
 
 class Solution:
     def replaceElements(self, arr: List[int]) -> List[int]:
-        p = 0
-        while p != len(arr)-1:
-            print(p, arr[p], arr[p+1], arr)
-            if arr[p] < arr[p+1]:
-                arr[p] = arr[p+1]
-                arr[p+1] = 0
-            p += 1
-
+        # p = 0
+        # while p != len(arr)-1:
+        #     print("탐색:", p, "해당: ", arr[p], "max:", max(arr[p+1:]), arr)
+        #     arr[p] = max(arr[p+1:])
+        #     p += 1
+        # arr[-1] = -1
+        # print(arr)
+        # return arr
+        mx = -1
+        for i in range(len(arr) - 1, -1, -1):  # 5, 4, 3, 2, 1, 0
+            print(">>", i, len(arr)-1, arr, arr[i])
+            print(arr[i], mx, max(mx, arr[i]), arr)
+            arr[i], mx = mx, max(mx, arr[i])
+            # arr[i] = mx
+            # mx = max(mx, arr[i])
+            """
+            arr[i] = mx
+            mx = max(mx, arr[i])
+            """
+            print(arr[i], mx, max(mx, arr[i]), arr)
+            # arr[i], mx = mx, max(mx, arr[i])
+        print(arr)
         return arr
 
 
