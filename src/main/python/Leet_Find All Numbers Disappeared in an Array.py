@@ -23,10 +23,25 @@ from typing import List
 
 class Solution:
     def findDisappearedNumbers(self, nums: List[int]) -> List[int]:
-        
-        return [1]
+        res = []
+        le = len(nums)
+        if le > max(nums):
+            return [le]
+        nums = sorted(list(set(nums)), reverse=True)
+        print(nums)
+        p = nums.pop()
+        if p != 1:
+            res += [i for i in range(1, p)]
+        while len(nums):
+            p2 = nums.pop()
+            print(p, p2)
+            if p+1 != p2:
+                res.append(p+1)
+            p = p+1
+        print(res)
+        return res
 
 
-arr = [4,3,2,7,8,2,3,1]
+arr = [2,2,5]
 s = Solution()
 s.findDisappearedNumbers(arr)
