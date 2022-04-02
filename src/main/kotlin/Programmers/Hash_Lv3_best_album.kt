@@ -1,5 +1,6 @@
+package Programmers
+
 import java.util.*
-import kotlin.math.max
 
 /**
  * 문제 설명
