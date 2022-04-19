@@ -51,52 +51,62 @@ class Solution:
         # return "a"
 
         """ DFS 방법 """
-        from collections import defaultdict
-        d = defaultdict(list)
-        s = list(s)
-        visited = [False for _ in range(len(s))]  # 방문의 경우 Boolean 타입으로 충분, 또는 0, 1
-
-        for source, destination in pairs:  # 인접 리스트(adj list) 만들기
-            d[source].append(destination)
-            d[destination].append(source)
-
-        def dfs(search_list, index, chars, indices):  # dfs 구현
-            print(index)
-            if visited[index]: # 이미 방문 함 -> 패스
-                return
-            chars.append(search_list[index])  # 문자열 저장
-            indices.append(index)  # 주소 저장
-            visited[index] = True   # 방문 기록
-            for neigh in d[index]:  # 인접 노드 dfs 수행
-                print(">", neigh, index)
-                dfs(search_list, neigh, chars, indices)
-
-        for i in range(len(s)):
-            if not visited[i]:
-                chars = []
-                indices = []
-                dfs(s, i, chars, indices)
-                chars = sorted(chars)
-                indices = sorted(indices)
-                for c, i in zip(chars, indices):
-                    s[i] = c
-        print("".join(s))
-        return "".join(s)
+        """
+            st = "dcab"
+            arr = [[0,3],[1,2],[0,2]]
+        """
+        # from collections import defaultdict
+        # d = defaultdict(list)  # 인접 리스트 저장용 해시맵 Dict<List<Char>>
+        # s = list(s)  # 문자열 to 리스트
+        # visited = [False for _ in range(len(s))]  # 방문의 경우 Boolean 타입으로 충분, 또는 0, 1
+        #
+        # for source, destination in pairs:  # 인접 리스트(adj list) 만들기
+        #     d[source].append(destination)
+        #     d[destination].append(source)
+        # print("String:", s, "\nAdjacency list: ", d)
+        #
+        # def dfs(search_list, index, chars, indices):  # dfs 구현
+        #     if visited[index]:  # 이미 방문 함 -> 패스
+        #         print("이미 방문", visited)
+        #         return
+        #     print("방문 리스트", visited, "\n방문할 곳:", index)
+        #     chars.append(search_list[index])  # 문자열 저장
+        #     indices.append(index)  # 주소 저장
+        #     visited[index] = True   # 방문 기록
+        #     print("문자 리스트:", chars, "주소 리스트", indices)
+        #     for neigh in d[index]:  # 인접 노드 dfs 수행
+        #         print("<인접 노드", neigh, ">", end=" ")
+        #         dfs(search_list, neigh, chars, indices)
+        #
+        # for i in range(len(s)):  # 주어진 문자열 모두 vertex(정점)으로 시작
+        #     if not visited[i]:  # 해당 정점이 아직 방문하지 않으면 dfs 수행
+        #         chars = []  # 문자 리스트
+        #         indices = []  # 주소 리스트
+        #         print(i,"Vertex DFS 수행")
+        #         dfs(s, i, chars, indices)  # DFS 함수 시작
+        #         chars = sorted(chars)  # 정렬
+        #         indices = sorted(indices)  # 정렬
+        #         print("\n정렬된 문자 리스트:", chars, "\n정렬된 주소 리스트:", indices)
+        #         for c, i in zip(chars, indices):  # 두 리스트의 각 요소를 하나로 합쳐서 반복
+        #             s[i] = c
+        #         print(">> String:", s, "\n")
+        #     else:
+        #         print(i, "Vertex DFS 이미 수행.")
+        # return "".join(s)
 
         """ Union Find 방법 """
         from collections import defaultdict
-
-        s = list(s)
-        nodes = [i for i in range(len(s))]
+        s = list(s)  # String to List
+        nodes = [i for i in range(len(s))]  # Node 리스트 생성
         size = [1 for i in range(len(s))]
 
-        def find(x):
+        def find(x):  # 찾기 메서드
             if x == nodes[x]:
                 return x
             nodes[x] = find(nodes[x])
             return nodes[x]
 
-        def union(x, y):
+        def union(x, y):  # 결합 메서드
             rootx = find(x)
             rooty = find(y)
             if rootx != rooty:
@@ -120,10 +130,11 @@ class Solution:
             for c, i in zip(chars, indices):
                 s[i] = c
 
+        print(s)
         return "".join(s)
 
 
 st = "dcab"
-arr = [[0,3],[1,2],[0,2]]
+arr = [[0,3],[1,2]]
 s = Solution()
 s.smallestStringWithSwaps(st, arr)
