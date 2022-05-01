@@ -23,6 +23,11 @@ Constraints:
     The number of the nodes in the list is in the range [0, 104].
     -105 <= Node.val <= 105
     pos is -1 or a valid index in the linked-list.
+
+참고
+    해당 문제는 연결리스트가 순회하는지 체크하는 기본 문제이다.
+    Input으로 주어지는 연결리스트의 객체 정보는 위에 주석처리 되어 있으므로 참고해서 알고리즘을 짜면 된다.
+
 """
 # Definition for singly-linked list.
 class ListNode:
@@ -30,6 +35,29 @@ class ListNode:
         self.val = x
         self.next = None
 
+
 class Solution:
-    def hasCycle(self, head: Optional[ListNode]) -> bool:
+    def hasCycle(self, head: ListNode) -> bool:
+        if head is None or head.next is None:
+            return False
+
+        slowNode = head
+        fastNode = head.next
+
+        print(">", slowNode.val, fastNode.val)
+
+        while fastNode != slowNode:
+            if fastNode is None or fastNode.next is None:
+                return False
+            else:
+                fastNode = fastNode.next.next
+                slowNode = slowNode.next
+                print(">>", slowNode.val, fastNode.val, "\n")
+
+        return True
+
+
+linkedList = [3,2,0,-4]
+ll = ListNode(linkedList)
+solution = Solution().hasCycle(ll)
 
