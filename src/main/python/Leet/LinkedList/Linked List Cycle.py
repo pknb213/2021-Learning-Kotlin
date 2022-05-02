@@ -38,6 +38,7 @@ class ListNode:
 
 class Solution:
     def hasCycle(self, head: ListNode) -> bool:
+        print(head, head.val, head.next)
         if head is None or head.next is None:
             return False
 
@@ -57,7 +58,7 @@ class Solution:
         return True
 
 
-linkedList = [3,2,0,-4]
-ll = ListNode(linkedList)
-solution = Solution().hasCycle(ll)
+ll = ListNode([3,2,0,-4])
+s = Solution()
+s.hasCycle(ll)
 

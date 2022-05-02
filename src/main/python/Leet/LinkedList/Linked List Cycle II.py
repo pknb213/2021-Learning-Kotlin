@@ -28,11 +28,57 @@ Constraints:
 Follow up: Can you solve it using O(1) (i.e. constant) memory?
 """
 
+
 # Definition for singly-linked list.
-# class ListNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.next = None
+class ListNode:
+    def __init__(self, x):
+        self.val = x
+        self.next = None
+
 
 class Solution:
-    def detectCycle(self, head: Optional[ListNode]) -> Optional[ListNode]:
+    def detectCycle(self, head: ListNode) -> ListNode:
+        if head is None or head.next is None:
+            return ListNode("None")
+
+        sn = head
+        fn = head.next
+
+        vis = {}
+
+        while fn.val not in vis:
+            print(sn.val, fn.val)
+            vis[sn.val] = head
+            sn = sn.next
+            fn = fn.next.next
+        print(head)
+        return vis.pop()
+
+        while sn != fn:
+            print(">", sn.val, fn.val)
+            if fn is None or fn.next is None:
+                return ListNode("None")
+            sn = sn.next
+            fn = fn.next.next
+
+
+            #     return sn
+            # else:
+            #     vis.append(sn.val)
+
+            print(">", sn.val, fn.val)
+            print("Err")
+            return ListNode("None")
+
+
+n1 = ListNode(3)
+n2 = ListNode(2)
+n3 = ListNode(0)
+n4 = ListNode(-4)
+n1.next = n2
+n2.next = n3
+n3.next = n4
+n4.next = n2
+
+s = Solution()
+s.detectCycle(n1)
