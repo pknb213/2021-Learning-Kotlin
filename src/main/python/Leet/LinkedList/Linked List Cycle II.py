@@ -38,37 +38,39 @@ class ListNode:
 
 class Solution:
     def detectCycle(self, head: ListNode) -> ListNode:
+        # Todo Method 1: Hash Set
+        # nodeSet = set()
+        # while head:
+        #     if head in nodeSet:
+        #         print(">>", head.val)
+        #         return head
+        #     nodeSet.add(head)
+        #     head = head.next
+        # print(">>", "None")
+        # return None
+
+        # Todo Method 2: Floyd's Algorithm
         if head is None or head.next is None:
-            return ListNode("None")
-
-        sn = head
-        fn = head.next
-
-        vis = {}
-
-        while fn.val not in vis:
-            print(sn.val, fn.val)
-            vis[sn.val] = head
-            sn = sn.next
-            fn = fn.next.next
-        print(head)
-        return vis.pop()
+            return None
+        sn, fn = head.next, head.next.next
 
         while sn != fn:
-            print(">", sn.val, fn.val)
-            if fn is None or fn.next is None:
-                return ListNode("None")
+            print(sn.val, fn.val)
+            if fn.next.next is None:
+                return None
             sn = sn.next
             fn = fn.next.next
 
+        print("Circle!", sn.val, fn.val)
 
-            #     return sn
-            # else:
-            #     vis.append(sn.val)
-
-            print(">", sn.val, fn.val)
-            print("Err")
-            return ListNode("None")
+        sn = head
+        while sn != fn:
+            print(">>", sn.val, fn.val)
+            sn = sn.next
+            fn = fn.next
+        print(">>", sn.val, fn.val)
+        print("Res:", sn.val)
+        return sn
 
 
 n1 = ListNode(3)
@@ -79,6 +81,7 @@ n1.next = n2
 n2.next = n3
 n3.next = n4
 n4.next = n2
+print("Node: 3->2->0->-4 ~> 2")
 
 s = Solution()
 s.detectCycle(n1)
