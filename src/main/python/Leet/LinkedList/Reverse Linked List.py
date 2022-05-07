@@ -28,7 +28,7 @@ class ListNode:
 
 class Solution:
     def reverseList(self, head: ListNode) -> ListNode:
-        # Todo: 재귀 함수
+        # Todo: 재귀 함수 (현재 노드에서 이전 노드를 재귀로 호출)
         # def reverse(node: ListNode, prev: ListNode = None ):
         #     # base case
         #     if not node:
@@ -41,7 +41,7 @@ class Solution:
         #     return reverse(next, node)
         # return reverse(head)
 
-        # Todo: 반복
+        # Todo: 반복 (현재 노드와 이전 노드를 생성)
         node, prev = head, None
 
         while node:
