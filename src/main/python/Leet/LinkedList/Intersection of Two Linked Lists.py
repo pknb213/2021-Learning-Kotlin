@@ -63,19 +63,90 @@ class ListNode:
 
 class Solution:
     def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> ListNode:
+        """
+        head A, B를 따라가면서 교차 지점이 있는지 조건을 주어야한다
+        교차지점이 없으면 intersectVal = 0을 준다.
+        떠오른 Hashset 방법 : 지나간 노드를 각각의 Set에 저장한다. 그리고 교집합을 이용하여 교차 지점을 구한다.
 
-        return ListNode
+        아래 형태로 접근하면 Runtime이 너무 길어진다.
+        """
+        # if headA is None or headB is None:
+        #     return None
+        #
+        # a_set = set()
+        # b_set = set()
+        #
+        # while headA and headB:
+        #     print(headA.val, headB.val)
+        #     if headA is not None:
+        #         a_set.add(headA.val)
+        #     if headB is not None:
+        #         b_set.add(headB.val)
+        #     if a_set.intersection(b_set):
+        #         break
+        #     elif headA.next is None and headB.next is None:
+        #         return None
+        #     if headA.next:
+        #         headA = headA.next
+        #     if headB.next:
+        #         headB = headB.next
+        #
+        # print(a_set, b_set)
+        # print(a_set.intersection(b_set))
+        #
+        # if a_set.intersection(b_set):
+        #     return a_set.intersection(b_set).pop()
+        # return None
 
+        a_map = set() #hashMap(hashSet)사용
 
-n1 = ListNode(3)
-n2 = ListNode(2)
-n3 = ListNode(0)
-n4 = ListNode(-4)
+        while headA: #순회하며 set에 각 노드를 넣고
+            a_map.add(headA)
+            headA = headA.next
+
+        while headB:
+            if headB in a_map: #head(로 시작하는 연결리스트가)가 set에 있는지 확인
+                return headB
+            else:
+                headB = headB.next
+        return None
+
+        res=set()
+
+        # Todo: 의문 위와 아래의 코드는 거의 일치하는데 아래가 더 많이 빠르다.
+
+        while headA:
+            res.add(headA)
+            headA=headA.next
+        while headB:
+            if headB not in res:
+                res.add(headB)
+            else:
+                return headB
+            headB=headB.next
+        return None
+
+n1 = ListNode(1)
+n2 = ListNode(9)
+n3 = ListNode(1)
+# n4 = ListNode(2) # 교차 O
+# n5 = ListNode(4)
+n4 = ListNode(6) # 교차 X
+n5 = ListNode(9)
+
+nn1 = ListNode(3)
+nn2 = ListNode(2)
+nn3 = ListNode(4)
+
 n1.next = n2
 n2.next = n3
 n3.next = n4
-n4.next = n2
-print("Node: 3->2->0->-4 ~> 2")
+n4.next = n5
+
+nn1.next = nn2
+nn2.next = nn3
+
+print("Node1: 1->9->1->2->4\nNode2: 3->2->4")
 
 s = Solution()
-s.detectCycle(n1)
+s.getIntersectionNode(n1, nn1)
