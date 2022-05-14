@@ -114,7 +114,7 @@ class MyLinkedList:
             return
 
         current = self.head   # 아직 prev의 next를 curr head에 안붙여서 None
-        newNode = Node(val)   # 신규 노드 생성 (none, val)
+        newNode = Node(val)   # 신규 노드 생성 (none, val)s
 
         if index <= 0:  # 링크드 리스트가 비어 있는 경우
             newNode.next = current  # 비어서 신규 노드의 next에 아직 없는 curr의 None을 붙임
