@@ -24,8 +24,38 @@ from typing import List
 
 class Solution:
     def search(self, nums: List[int], target: int) -> int:
-        
-        return 1
+        le = len(nums)
+        inx = 0
+        print(le,  le//2, nums[le//2], nums)
+        while nums:
+            mid = len(nums) // 2
+            print(inx, nums, mid)
+            if nums[mid] == tar:
+                print(inx+mid, "!!!")
+                return inx + mid
+            else:
+                if len(nums) <= 1:
+                    print("-1, Fail")
+                    return -1
+                elif tar > nums[mid]:
+                    inx += mid
+                    nums = nums[mid:]
+                else:
+                    nums = nums[:mid]
+        return -1
+
+        # Todo: 속도가 이게 더 빠름: nums 배열을 잘라서 다시 할당하지 않고 left, right index를 통해 계산
+        left = 0
+        right = len(nums) - 1
+        while left <= right:
+            mid = left + (right - left) // 2
+            if nums[mid] == target:
+                return mid
+            if nums[mid] > target:
+                right = mid - 1
+            else:
+                left = mid + 1
+        return -1
 
 
 li = [-1,0,3,5,9,12]
