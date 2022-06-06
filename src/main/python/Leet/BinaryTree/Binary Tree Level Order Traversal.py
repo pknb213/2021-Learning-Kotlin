@@ -17,6 +17,7 @@ Constraints:
     -1000 <= Node.val <= 1000
 """
 # Definition for a binary tree node.
+from queue import Queue
 from typing import List
 
 
@@ -29,8 +30,45 @@ class TreeNode:
 
 class Solution:
     def levelOrder(self, root: TreeNode) -> List[List[int]]:
-        
-        pass
+        if root is None:
+            return []
+        q, res = Queue(), []
+        q.put(root)
+        while q.qsize():
+            footprint, leaf = [], Queue()
+            while q.qsize():
+                cur = q.get(0)
+                print("Current :", cur.val)
+                footprint.append(cur.val)
+                if cur.left:
+                    leaf.put(cur.left)
+                if cur.right:
+                    leaf.put(cur.right)
+                print("Footprint:", footprint, "\nChild:", leaf.qsize(), "Que Size:", q.qsize())
+            q = leaf
+            res.append(footprint)
+            print("Res:", res, "Que:", q.qsize(), "\n")
+        print(res)
+        return res
+
+        # """ Deque 풀이법 (성능 업) """
+        # if root is None:
+        #     return root
+        # queue = collections.deque()
+        # queue.append(root)
+        # levels = []
+        #
+        # while queue:
+        #     currentLevel = []
+        #     for _ in range(len(queue)):
+        #         currentNode = queue.popleft()
+        #         currentLevel.append(currentNode.val)
+        #         if currentNode.left:
+        #             queue.append(currentNode.left)
+        #         if currentNode.right:
+        #             queue.append(currentNode.right)
+        #     levels.append(currentLevel)
+        # return levels
 
 
 t5 = TreeNode(7, None, None)
